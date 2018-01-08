@@ -12,13 +12,13 @@ gem 'rack-attack'
  
 gem 'friendly_id', '~> 5.1.0'
  
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
  
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'byebug', platform: :mri
 end
