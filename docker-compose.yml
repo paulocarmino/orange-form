@@ -6,6 +6,12 @@ services:
     volumes:
       - 'postgres:/var/lib/postgresql/data'
 
+  mailcatcher:
+    image: tophfr/mailcatcher
+    ports:
+      - 1025:25
+      - 1080:80
+
   app:
     depends_on:
       - 'postgres'
