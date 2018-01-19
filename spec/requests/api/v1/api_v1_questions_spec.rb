@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Questions", type: :request do
+  
   describe "POST /questions" do
     context "With Invalid authentication headers" do
       it_behaves_like :deny_without_authorization, :post, "/api/v1/questions"
@@ -177,5 +178,4 @@ RSpec.describe "Api::V1::Questions", type: :request do
     end
   end
 
-  
 end
