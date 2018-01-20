@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Questions", type: :request do
-  
   describe "POST /questions" do
     context "With Invalid authentication headers" do
       it_behaves_like :deny_without_authorization, :post, "/api/v1/questions"
@@ -47,14 +46,14 @@ RSpec.describe "Api::V1::Questions", type: :request do
           end
 
           it "returns 400" do
-            post "/api/v1/questions", params: {question: {}, form_id: @form.id}, headers: header_with_authentication(@user)            
+            post "/api/v1/questions", params: {question: {}, form_id: @form.id}, headers: header_with_authentication(@user)
             expect_status(400)
           end
         end
 
         context "invalid form" do
-          it "returns 400" do
-            post "/api/v1/questions", params: {question: {}}, headers: header_with_authentication(@user)            
+          it "returns 404" do
+            post "/api/v1/questions", params: {question: {}}, headers: header_with_authentication(@user)
             expect_status(404)
           end
         end
@@ -75,11 +74,11 @@ RSpec.describe "Api::V1::Questions", type: :request do
 
       context "When question exists" do
 
-        context "And user is the form owner" do
+        context "And user is the questions owner" do
           before do
             @form = create(:form, user: @user)
             @question = create(:question, form: @form)
-            @question_attributes = attributes_for(:question, id: @question.id)
+            @question_attributes = attributes_for(:question)
             put "/api/v1/questions/#{@question.id}", params: {question: @question_attributes}, headers: header_with_authentication(@user)
           end
 
@@ -135,7 +134,6 @@ RSpec.describe "Api::V1::Questions", type: :request do
     context "With Invalid authentication headers" do
       it_behaves_like :deny_without_authorization, :delete, "/api/v1/questions/0"
     end
-
 
     context "With valid authentication headers" do
 
